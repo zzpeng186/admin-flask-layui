@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css" media="all">
+</head>
+<body>
+<div style="margin: 0 auto;" class="layui-container layui-row">
+    <div style="margin-top: 50px;"><h1>ceshi</h1>
+        <hr>
+    </div>
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+
+        <ul class="layui-tab-title">
+            <li class="layui-this" lay-id="index">首页</li>
+            <li lay-id="2">目录</li>
+            <li>权限分配</li>
+            <li>商品管理</li>
+            <li>订单管理</li>
+        </ul>
+        <div class="layui-row layui-col-space10">
+
+            <div class="layui-col-md3" style="margin-top: 50px">
+                {#                <div class="layui-tab-content" style="height: 100px;">#}
+                {#                <div class="grid-demo">3/12</div>#}
+                <form class="layui-form" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            {#                            <label class="layui-form-label">验证手机</label>#}
+                            <div class="layui-input-inline">
+                                <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off"
+                                       class="layui-input" placeholder="搜索内容">
+                            </div>
+                            <button type="button" class="layui-btn layui-btn-normal">搜索</button>
+                        </div>
+
+
+                    </div>
+                </form>
+
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+                    <legend>分类</legend>
+                </fieldset>
+                <table class="layui-table" lay-even="" lay-skin="nob">
+                    <tbody>
+                    <tr>
+                        <td>贤心</td>
+                        <td>汉族</td>
+                        <td>1989-10-14</td>
+
+                    </tr>
+                    <tr>
+                        <td>张爱玲</td>
+                        <td>汉族</td>
+                        <td>1920-09-30</td>
+
+                    </tr>
+                    <tr>
+                        <td>Helen Keller</td>
+                        <td>拉丁美裔</td>
+                        <td>1880-06-27</td>
+
+                    </tr>
+                    <tr>
+                        <td>岳飞</td>
+                        <td>汉族</td>
+                        <td>1103-北宋崇宁二年</td>
+
+                    </tr>
+                    <tr>
+                        <td>孟子</td>
+                        <td>华夏族（汉族）</td>
+                        <td>公元前-372年</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+                    <legend>友情连接</legend>
+                </fieldset>
+                <table class="layui-table" lay-even="" lay-skin="nob">
+                    <tbody>
+                    <tr>
+                        <td><a href="https://www.baidu.com/" target="_blank">百度</a></td>
+                        <td>汉族</td>
+                        <td>1989-10-14</td>
+
+                    </tr>
+                    <tr>
+                        <td>张爱玲</td>
+                        <td>汉族</td>
+                        <td>1920-09-30</td>
+
+                    </tr>
+                    <tr>
+                        <td>Helen Keller</td>
+                        <td>拉丁美裔</td>
+                        <td>1880-06-27</td>
+
+                    </tr>
+                    <tr>
+                        <td>岳飞</td>
+                        <td>汉族</td>
+                        <td>1103-北宋崇宁二年</td>
+
+                    </tr>
+                    <tr>
+                        <td>孟子</td>
+                        <td>华夏族（汉族）</td>
+                        <td>公元前-372年</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="layui-col-md9" style="margin-top: 1%">
+                <div class="layui-tab-content" style="height: 100px;" id="tab_content_detail">
+
+{#                    <ul class="layui-timeline">#}
+{#                        <li class="layui-timeline-item">#}
+{#                            <i class="layui-icon layui-timeline-axis"></i>#}
+{#                            <div class="layui-timeline-content layui-text">#}
+{#                                <h3 class="layui-timeline-title">8月18日</h3>#}
+{#                                <ul>#}
+{#                                    <li>《登高》</li>#}
+{#                                    <li>《茅屋为秋风所破歌》</li>#}
+{#                                </ul>#}
+{#                            </div>#}
+{#                        </li>#}
+{##}
+{#                        <li class="layui-timeline-item">#}
+{#                            <i class="layui-icon layui-timeline-axis"></i>#}
+{#                            <div class="layui-timeline-content layui-text">#}
+{#                                <h3 class="layui-timeline-title">8月16日</h3>#}
+{#                                <ul>#}
+{#                                    <li>《登高》</li>#}
+{#                                    <li>《茅屋为秋风所破歌》</li>#}
+{#                                </ul>#}
+{#                            </div>#}
+{#                        </li>#}
+{##}
+{#                        <li class="layui-timeline-item">#}
+{#                            <i class="layui-icon layui-timeline-axis"></i>#}
+{#                            <div class="layui-timeline-content layui-text">#}
+{#                                <h3 class="layui-timeline-title">8月10日</h3>#}
+{#                                <ul>#}
+{#                                    <li>《登高》</li>#}
+{#                                    <li>《茅屋为秋风所破歌》</li>#}
+{#                                </ul>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                    </ul>#}
+
+{#                    当为首页时显示如下#}
+{#                    <div style="margin-top: 30px">#}
+{#                        <h2>ceshi</h2>#}
+{#                        <p style="color: #009688; margin-top: 10px">2020-01-01 | python</p>#}
+{#                        <p style="margin-top: 2%; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;">#}
+{#                            table 模块是我们的又一走心之作，在 layui 2.0 的版本中全新推出，是 layui#}
+{#                            最核心的组成之一。它用于对表格进行一些列功能和动态化数据操作，涵盖了日常业务所涉及的几乎全部需求。支持固定表头、固定行、固定列左/列右，支持拖拽改变列宽度，支持排序，支持多级表头，支持单元格的自定义模板，支持对表格重载（比如搜索、条件筛选等），支持复选框，支持分页，支持单元格编辑等等一些列功能。尽管如此，我们仍将对其进行完善，在控制代码量和性能的前提下，不定期增加更多人性化功能。table#}
+{#                            模块也将是 layui 重点维护的项目之一。#}
+{#                        </p><br/><br/>#}
+{#                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" style="float: right">#}
+{#                            阅读全文#}
+{#                        </button>#}
+{#                        <br/><br/>#}
+{#                        <hr>#}
+{#                    </div>#}
+{#                    <div style="margin-top: 30px">#}
+{#                        <h2>ceshi</h2>#}
+{#                        <p style="color: #009688; margin-top: 10px">2020-01-01 | python</p>#}
+{#                        <p style="margin-top: 2%; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;">#}
+{#                            table 模块是我们的又一走心之作，在 layui 2.0 的版本中全新推出，是 layui#}
+{#                            最核心的组成之一。它用于对表格进行一些列功能和动态化数据操作，涵盖了日常业务所涉及的几乎全部需求。支持固定表头、固定行、固定列左/列右，支持拖拽改变列宽度，支持排序，支持多级表头，支持单元格的自定义模板，支持对表格重载（比如搜索、条件筛选等），支持复选框，支持分页，支持单元格编辑等等一些列功能。尽管如此，我们仍将对其进行完善，在控制代码量和性能的前提下，不定期增加更多人性化功能。table#}
+{#                            模块也将是 layui 重点维护的项目之一。#}
+{#                        </p><br/><br/>#}
+{#                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" style="float: right">#}
+{#                            阅读全文#}
+{#                        </button>#}
+{#                        <br/><br/>#}
+{#                        <hr>#}
+{#                    </div>#}
+{#                    <div style="margin-top: 30px">#}
+{#                        <h2>ceshi</h2>#}
+{#                        <p style="color: #009688; margin-top: 10px">2020-01-01 | python</p>#}
+{#                        <p style="margin-top: 2%; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;">#}
+{#                            table 模块是我们的又一走心之作，在 layui 2.0 的版本中全新推出，是 layui#}
+{#                            最核心的组成之一。它用于对表格进行一些列功能和动态化数据操作，涵盖了日常业务所涉及的几乎全部需求。支持固定表头、固定行、固定列左/列右，支持拖拽改变列宽度，支持排序，支持多级表头，支持单元格的自定义模板，支持对表格重载（比如搜索、条件筛选等），支持复选框，支持分页，支持单元格编辑等等一些列功能。尽管如此，我们仍将对其进行完善，在控制代码量和性能的前提下，不定期增加更多人性化功能。table#}
+{#                            模块也将是 layui 重点维护的项目之一。#}
+{#                        </p><br/><br/>#}
+{#                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" style="float: right">#}
+{#                            阅读全文#}
+{#                        </button>#}
+{#                        <br/><br/>#}
+{#                        <hr>#}
+{#                    </div>#}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {#    <div class="layui-row layui-col-space10">#}
+    {##}
+    {#        <div class="layui-col-md3">#}
+    {#            <div class="grid-demo">3/12</div>#}
+    {#        </div>#}
+    {#        <div class="layui-col-md9">#}
+    {#            <div class="grid-demo grid-demo-bg1">9/12</div>#}
+    {#        </div>#}
+    {#    </div>#}
+</div>
+
+<script src="../static/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
+<script>
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        element.on('tab(docDemoTabBrief)', function () {
+            alert(this.getAttribute('lay-id'))
+            var lay_id = this.getAttribute('lay-id');
+            var html = ""
+            if (lay_id == "index") {
+                {#<div style="margin-top: 30px">#}
+                {#        <h2>ceshi</h2>#}
+                {#        <p style="color: #009688; margin-top: 10px">2020-01-01 | python</p>#}
+                {#        <p style="margin-top: 2%; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;">#}
+                {#            table 模块是我们的又一走心之作，在 layui 2.0 的版本中全新推出，是 layui#}
+                {#            最核心的组成之一。它用于对表格进行一些列功能和动态化数据操作，涵盖了日常业务所涉及的几乎全部需求。支持固定表头、固定行、固定列左/列右，支持拖拽改变列宽度，支持排序，支持多级表头，支持单元格的自定义模板，支持对表格重载（比如搜索、条件筛选等），支持复选框，支持分页，支持单元格编辑等等一些列功能。尽管如此，我们仍将对其进行完善，在控制代码量和性能的前提下，不定期增加更多人性化功能。table#}
+                {#            模块也将是 layui 重点维护的项目之一。#}
+                {#        </p><br/><br/>#}
+                {#        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" style="float: right">#}
+                {#            阅读全文#}
+                {#        </button>#}
+                {#        <br/><br/>#}
+                {#        <hr>#}
+                {#    </div>#}
+                var html = '<div style="margin-top: 30px">' + '<h2>ceshi</h2>' + '<p style="color: #009688; margin-top: 10px">2020-01-01 | python</p>' +
+                '<p style="margin-top: 2%; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;">' +
+                'table 模块是我们的又一走心之作，在 layui 2.0 的版本中全新推出，是 layui最核心的组成之一。它用于对表格进行一些列功能和动态化数据操作，涵盖了日常业务所涉及的几乎全部需求。支持固定表头、固定行、固定列左/列右，支持拖拽改变列宽度，支持排序，支持多级表头，支持单元格的自定义模板，支持对表格重载（比如搜索、条件筛选等），支持复选框，支持分页，支持单元格编辑等等一些列功能。尽管如此，我们仍将对其进行完善，在控制代码量和性能的前提下，不定期增加更多人性化功能。table模块也将是 layui 重点维护的项目之一' +
+                '</p><br/><br/>' + '<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" style="float: right">' +
+                '阅读全文' + '</button>' + '<br/><br/>' + '<hr>' + '</div>';
+                $("#tab_content_detail").html(html)
+
+            }if (lay_id == "2"){
+                {#<li class="layui-timeline-item">#}
+                {#            <i class="layui-icon layui-timeline-axis"></i>#}
+                {#            <div class="layui-timeline-content layui-text">#}
+                {#                <h3 class="layui-timeline-title">8月18日</h3>#}
+                {#                <ul>#}
+                {#                    <li>《登高》</li>#}
+                {#                    <li>《茅屋为秋风所破歌》</li>#}
+                {#                </ul>#}
+                {#            </div>#}
+                {#        </li>#}
+                html = '<li class="layui-timeline-item">' +
+                '<i class="layui-icon layui-timeline-axis"></i>' +
+                '<div class="layui-timeline-content layui-text">' +
+                '<h3 class="layui-timeline-title">8月18日</h3>' +
+                '<ul>' +
+                '<li>《登高》</li>' +
+                '<li>《茅屋为秋风所破歌》</li>' +
+                '</ul>' +
+                '</div>' + '</li>';
+                $("#tab_content_detail").html(html)
+            }
+        });
+    });
+</script>
+
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            , url: 'https://www.layui.com/demo/table/user/'
+            , cols: [[
+                {field: 'id', width: 80, sort: true}
+                , {field: 'username', width: 80}
+                , {field: 'sex', width: 80, sort: true}
+                , {field: 'city', width: 80}
+                {#,{field:'sign', title: '签名', minWidth: 150}#}
+                {#,{field:'experience', width:80, title: '积分', sort: true}#}
+                {#,{field:'score', width:80, title: '评分', sort: true}#}
+                {#,{field:'classify', width:80, title: '职业'}#}
+                {#,{field:'wealth', width:135, title: '财富', sort: true}#}
+            ]]
+            , page: true
+
+        });
+    });
+</script>
+</body>
+</html>
