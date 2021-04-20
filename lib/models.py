@@ -6,7 +6,7 @@ class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50))
     email = db.Column(db.String(50))
-    # mobile_num = db.Column(db.String(11))
+    # mobile_num = db.Column(db.Strin(11))
 
 
 class ArticleModel(db.Model):
