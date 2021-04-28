@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, jsonify
+from flask import render_template, jsonify, request
 
 import json
 
@@ -34,6 +34,20 @@ def index_list():
     data_dict = {'code': 0, 'msg': 'success', 'count': 100, 'data': article_list}
     # data_json = json.dumps(data_dict)
     return jsonify(data_dict)
+
+
+@app.route('/api/detail', methods=['GET'])
+def detail():
+    if request.method == 'GET':
+        detail_id = request.args.get('id')
+        article_detail = ArticleModel.query.filter(ArticleModel.id == int(detail_id))[0]
+        # print(article_detail[0].content)
+        # article_detail = article_obj
+        article_dict = {'title': article_detail.title, 'content': article_detail.content,
+                        'author': article_detail.author.username, 'category': article_detail.category.name}
+
+        data_dict = {'code': 0, 'msg': 'success', 'data': article_dict}
+        return jsonify(data_dict)
 
 
 
