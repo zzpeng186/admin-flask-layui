@@ -58,6 +58,17 @@ function get_article() {
     });
 }
 
+function get_title_list() {
+    return $.ajax({
+        type: "GET",
+        url: "/api/title_list/",
+        dataType: "json",
+        contentType: "application/json;utf-8",
+        // data: data,
+        timeout: 6000
+    });
+}
+
 // get_article()
 //     .done(function (response) {
 //         console.log(response);
@@ -108,17 +119,42 @@ layui.use('element', function () {
                     $("#tab_content_detail").html(html)
 
                 }
-                if (lay_id == "2") {
-                    html = '<li class="layui-timeline-item">' +
-                        '<i class="layui-icon layui-timeline-axis"></i>' +
-                        '<div class="layui-timeline-content layui-text">' +
-                        '<h3 class="layui-timeline-title">8月18日</h3>' +
-                        '<ul>' +
-                        '<li>《登高》</li>' +
-                        '<li>《茅屋为秋风所破歌》</li>' +
-                        '</ul>' +
-                        '</div>' + '</li>';
-                    $("#tab_content_detail").html(html)
+                if (lay_id == "title_list") {
+                    get_title_list()
+                        .done(function (response) {
+                            var html = "";
+                            var data_list = response['data']
+                            for (var i = 0; i < data_list.length; i++) {
+                                html += '<li>' + data_list[i].title + '</li>';
+                            }
+                            title_html = '<li class="layui-timeline-item">' +
+                                    '<div class="layui-timeline-content layui-text">' +
+                                    '<ul>' +
+                                    html +
+                                    '</ul>' +
+                                    '</div>' + '</li>';
+                            $("#tab_content_detail").html(title_html)
+                                // html = '<li class="layui-timeline-item">' +
+                                //     '<div class="layui-timeline-content layui-text">' +
+                                //     '<ul>' +
+                                //     '<li>《登高》</li>' +
+                                //     '<li>《茅屋为秋风所破歌》</li>' +
+                                //     '</ul>' +
+                                //     '</div>' + '</li>';
+
+                        })
+
+                    // $("#tab_content_detail").html(html)
+                    // html = '<li class="layui-timeline-item">' +
+                    //     '<i class="layui-icon layui-timeline-axis"></i>' +
+                    //     '<div class="layui-timeline-content layui-text">' +
+                    //     '<h3 class="layui-timeline-title">8月18日</h3>' +
+                    //     '<ul>' +
+                    //     '<li>《登高》</li>' +
+                    //     '<li>《茅屋为秋风所破歌》</li>' +
+                    //     '</ul>' +
+                    //     '</div>' + '</li>';
+                    // $("#tab_content_detail").html(html)
                 }
                 // return data_dict
             })
@@ -164,11 +200,12 @@ function detail_click(data_id){
             // alert('1')
             var data_detail = response['data'];
             var html = "";
+            alert(data_detail.add_time)
             html = '<div style="margin-top: 30px">' + '<h1 style="text-align:center">' + data_detail.title + '</h1>' +
-                '<p style="color: #009688; margin-top: 10px">2020-01-01 | ' + data_detail.category + '</p>' +
-                '<br/>' + '<hr>' +
+                '<p style="color: #009688; margin-top: 10px; text-align: center">' + data_detail.add_time + ' | ' + data_detail.category + '</p>' +
+                '<hr>' + '<br/>' +
                 '<p>' + data_detail.content + '</p>' +
-                '<br/><br/>' + '<hr>' + '</div>';
+                '<br/>' + '<hr>' + '</div>';
             $("#tab_content_detail").html(html)
         })
     // alert(data_id)
