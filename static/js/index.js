@@ -103,11 +103,12 @@ layui.use('element', function () {
         // alert(data_list['count'])
         var lay_id = this.getAttribute('lay-id');
         var html = ""
-        get_article()
-            .done(function (response) {
-                console.log(response);
-                var data_list = response['data']
-                if (lay_id == "index") {
+        if (lay_id == "index") {
+            get_article()
+                .done(function (response) {
+                    console.log(response);
+                    var data_list = response['data']
+                    // if (lay_id == "index") {
                     alert(response['data'].length)
                     for (var i = 0; i < data_list.length; i++) {
                         html += '<div style="margin-top: 30px">' + '<h2>' + data_list[i].title + '</h2>' + '<p style="color: #009688; margin-top: 10px">2020-01-01 | python</p>' +
@@ -118,49 +119,38 @@ layui.use('element', function () {
                     }
                     $("#tab_content_detail").html(html)
 
-                }
-                if (lay_id == "title_list") {
-                    get_title_list()
-                        .done(function (response) {
-                            var html = "";
-                            var data_list = response['data']
-                            for (var i = 0; i < data_list.length; i++) {
-                                html += '<li>' + data_list[i].title + '</li>';
-                            }
-                            title_html = '<li class="layui-timeline-item">' +
-                                    '<div class="layui-timeline-content layui-text">' +
-                                    '<ul>' +
-                                    html +
-                                    '</ul>' +
-                                    '</div>' + '</li>';
-                            $("#tab_content_detail").html(title_html)
-                                // html = '<li class="layui-timeline-item">' +
-                                //     '<div class="layui-timeline-content layui-text">' +
-                                //     '<ul>' +
-                                //     '<li>《登高》</li>' +
-                                //     '<li>《茅屋为秋风所破歌》</li>' +
-                                //     '</ul>' +
-                                //     '</div>' + '</li>';
-
-                        })
-
-                    // $("#tab_content_detail").html(html)
+                })
+        }
+        if (lay_id == "title_list") {
+            // if (lay_id == "title_list") {
+            get_title_list()
+                .done(function (response) {
+                    var html = "";
+                    var data_list = response['data']
+                    for (var i = 0; i < data_list.length; i++) {
+                        html += '<li>' + '<a href="javascript:detail_click(' + data_list[i].id + ')">' + data_list[i].title + '</a>' + '</li>';
+                    }
+                    title_html = '<li class="layui-timeline-item">' +
+                        '<div class="layui-timeline-content layui-text">' +
+                        '<ul>' +
+                        html +
+                        '</ul>' +
+                        '</div>' + '</li>';
+                    $("#tab_content_detail").html(title_html)
                     // html = '<li class="layui-timeline-item">' +
-                    //     '<i class="layui-icon layui-timeline-axis"></i>' +
                     //     '<div class="layui-timeline-content layui-text">' +
-                    //     '<h3 class="layui-timeline-title">8月18日</h3>' +
                     //     '<ul>' +
                     //     '<li>《登高》</li>' +
                     //     '<li>《茅屋为秋风所破歌》</li>' +
                     //     '</ul>' +
                     //     '</div>' + '</li>';
-                    // $("#tab_content_detail").html(html)
-                }
+
+                })
+        }
                 // return data_dict
-            })
-            .fail(function () {
-                //TODO
-            });
+            // .fail(function () {
+            //     //TODO
+            // });
 
     });
 });

@@ -7,13 +7,52 @@ from config import configs
 from lib.exts import db
 
 from lib.models import UserModel, ArticleModel, CategoryModel
+from lib.users_permissions import check_user_token
 
 app = Flask(__name__)
 app.config.from_object(configs)
 db.init_app(app)
 
 
+# def check_user_token(func):
+#     """
+#     后端请求判断是否登录
+#     :param func:
+#     :return:
+#     """
+#     def inner(*args, **kwargs):
+#         # 判断是否登录
+#         # # 测试代码
+#         # token = args[0].META.get('HTTP_AUTHENTICATION', '')
+#         token_dict = {'65daa01eb5ae4a3f8f9cb7ec293ec0ee1a453d06': 'admin'}
+#         # token = '65daa01eb5ae4a3f8f9cb7ec293ec0ee1a453d06'
+#
+#         # print(args)
+#         if request.remote_addr != '127.0.0.1':
+#             print(request.remote_addr)
+#             data_dict = {'code': 0, 'msg': 'error', 'count': 100}
+#             return jsonify(data_dict)
+#         # token = args[0].GET.get('token', '')
+#         # token = str(token)
+#         # print(token)
+#
+#         # data_json = json.dumps(data_dict)
+#
+#
+#
+#         # print('+++++++++++', username)
+#         # if username == "":
+#         #     # 保存当前的url到session中
+#         #     args[0].session["path"] = args[0].path
+#         #     # 重定向到登录页面
+#         #     return HttpResponseRedirect(reverse("login"))
+#         return func(*args, **kwargs)
+#
+#     return inner
+
+
 @app.route('/')
+# @check_user_token
 def hello_world():
     return render_template('index.html')
     # return 'Hello World!'
@@ -91,6 +130,11 @@ def title_list():
 #         date_month_list = str(article.add_time).split('-', 2)
 #         date_month = date_month_list[0] + '-' + date_month_list[1]
 
+
+@app.route('/admin/index/')
+@check_user_token
+def admin_index():
+    return render_template('admin_index.html')
 
 
 

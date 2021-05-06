@@ -3,89 +3,399 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 管理系统大布局 - Layui</title>
-    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <title>layout 后台大布局 - Layui</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.1.0.rc2/echarts.min.js"></script>
 </head>
-<body>
+<body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">layout demo</div>
-        <!-- 头部区域（可配合layui 已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">nav 1</a></li>
-            <li class="layui-nav-item"><a href="">nav 2</a></li>
-            <li class="layui-nav-item"><a href="">nav 3</a></li>
+        <div class="layui-logo">layui 后台布局</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left" lay-filter="eltitle">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
             <li class="layui-nav-item">
-                <a href="javascript:;">nav groups</a>
+                <a href="javascript:;">其它系统</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">menu 11</a></dd>
-                    <dd><a href="">menu 22</a></dd>
-                    <dd><a href="">menu 33</a></dd>
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
                 </dl>
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
-                         class="layui-nav-img">
-                    tester
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    贤心
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">set 1</a></dd>
-                    <dd><a href="">set 2</a></dd>
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">Sign out</a></li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
         </ul>
     </div>
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <ul class="layui-nav layui-nav-tree" lay-filter="article_menu">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">menu group 1</a>
+                    <a class="" href="javascript:;">所有商品</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">menu item 1-1</a></dd>
-                        <dd><a href="javascript:;">menu item 1-2</a></dd>
-                        <dd><a href="javascript:;">menu item 1-3</a></dd>
-                        <dd><a href="">the links</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">menu group 2</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">list 2-1</a></dd>
-                        <dd><a href="javascript:;">list 2-2</a></dd>
+                        <dd><a href="javascript:;" class="layui-this" id="index">首页</a></dd>
+                        <dd><a href="javascript:;" id="add_article">新增</a></dd>
+                        <dd><a href="javascript:;" id="image_index">展示</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:;">menu item 123</a></li>
-                <li class="layui-nav-item"><a href="">the links</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">解决方案</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">列表一</a></dd>
+                        <dd><a href="javascript:;">列表二</a></dd>
+                        <dd><a href="">超链接</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">云市场</a></li>
+                <li class="layui-nav-item"><a href="">发布商品</a></li>
             </ul>
         </div>
     </div>
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
+
+        <div style="padding: 15px;">
+            <blockquote class="layui-elem-quote">
+                首页
+            </blockquote>
+
+            <div class="layui-bg-gray" style="padding: 10px;">
+                <div class="layui-row layui-col-space15">
+{#                    <div class="layui-col-md6">#}
+                    <div class="layui-card">
+                        <div class="layui-card-header">服务器信息</div>
+                        <div class="layui-card-body">
+                            <table class="layui-table" lay-skin="line">
+{#                                <colgroup>#}
+{#                                    <col width="150">#}
+{#                                    <col width="150">#}
+{#                                    <col width="200">#}
+{#                                    <col>#}
+{#                                </colgroup>#}
+                                <tbody>
+                                <tr>
+                                    <td>贤心</td>
+                                    <td>汉族</td>
+
+                                </tr>
+                                <tr>
+                                    <td>张爱玲</td>
+                                    <td>汉族</td>
+{#                                    <td>1920-09-30</td>#}
+{#                                    <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>#}
+                                </tr>
+                                <tr>
+                                    <td>Helen Keller</td>
+                                    <td>拉丁美裔</td>
+{#                                    <td>1880-06-27</td>#}
+{#                                    <td> Life is either a daring adventure or nothing.</td>#}
+                                </tr>
+                                <tr>
+                                    <td>岳飞</td>
+                                    <td>汉族</td>
+{#                                    <td>1103-北宋崇宁二年</td>#}
+{#                                    <td>教科书再滥改，也抹不去“民族英雄”的事实</td>#}
+                                </tr>
+                                <tr>
+                                    <td>孟子</td>
+                                    <td>华夏族（汉族）</td>
+{#                                    <td>公元前-372年</td>#}
+{#                                    <td>猿强，则国强。国强，则猿更强！</td>#}
+                                </tr>
+                                </tbody>
+                            </table>
+{#                                <div>当前时间: 2021-05-06</div>#}
+{#                                <div>cpu核心数: 1</div>#}
+{#                                <div id="echarts_detail" style="width: 300px;height:300px;"></div>#}
+                            </div>
+                        </div>
+{#                    </div>#}
+{#                    <div class="layui-col-md6">#}
+{#                        <div class="layui-card">#}
+{#                            <div class="layui-card-header">内存信息</div>#}
+{#                            <div class="layui-card-body">#}
+{#                                结合 layui 的栅格系统<br>#}
+{#                                轻松实现响应式布局#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+            </div>
+
+            <div class="layui-bg-gray" style="padding: 10px;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">cpu信息</div>
+                            <div class="layui-card-body">
+                                <div id="echarts_detail" style="width: 300px;height:300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header">内存信息</div>
+                            <div class="layui-card-body">
+                                结合 layui 的栅格系统<br>
+                                轻松实现响应式布局
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+{#            <div class="layui-row">#}
+{#                <div class="layui-col-xs6">#}
+{#                    <div class="grid-demo grid-demo-bg1">#}
+{#                        <div id="echarts_detail" style="width: 600px;height:400px;"></div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="layui-col-xs6">#}
+{#                    <div class="grid-demo">6/12</div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <table class="layui-hide" id="article_list" lay-filter="article_list"></table>#}
+
+        </div>
     </div>
+
 
     <div class="layui-footer">
         <!-- 底部固定区域 -->
-        底部固定区域
+        © layui.com - 底部固定区域
     </div>
+
 </div>
 
-<script src="../static/layui/layui.js"></script>
+
+<script src="/static/layui/layui.js"></script>
+
+<script type="text/html" id="article_bar">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+{#    <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">居中弹出</button>#}
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('echarts_detail'));
+
+    myChart.setOption({
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',    // 设置图表类型为饼图
+                radius: '35%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                data: [          // 数据数组，name 为数据项名称，value 为数据项值
+                    {value: 0.5, name: '视频广告'},
+                    {value: 99.5, name: '联盟广告'},
+                    {#{value: 10, name: '邮件营销'},#}
+                    {#{value: 15, name: '直接访问'},#}
+                    {#{value: 15, name: '搜索引擎'}#}
+                ]
+            }
+        ]
+    })
+</script>
+{#<script>#}
+{#    layui.use('table', function () {#}
+{#        var table = layui.table;#}
+{##}
+{#        table.render({#}
+{#            elem: '#article_list'#}
+{#            , url: '{% url 'get_index' %}'#}
+{#            , parseData: function (data) {#}
+                {#alert(data.data);#}
+                {#alert(data.data.status);#}
+{#                return {#}
+{#                    "code": data.code,#}
+{#                    "data": data.data#}
+{#                }#}
+{#            }#}
+{#            , page: true#}
+{#            , limit: 1#}
+{#            , cols: [[#}
+{#                {field: 'id', width: 80, align: 'center', title: 'ID', sort: true}#}
+{#                , {field: 'title_name', width: 200, align: 'center', title: '名称'}#}
+{#                , {field: 'category__name', width: 130, align: 'center', title: '所属类别', sort: true}#}
+{#                , {field: 'content', width: 300, align: 'center', title: '内容'}#}
+{#                , {field: 'add_time', width: 130, align: 'center', title: '添加时间', sort: true}#}
+{#                , {fixed: 'right', align: 'center', title: '操作', toolbar: '#article_bar', minWidth: 100}#}
+{#                // ,{field:'experience', width:80, title: '积分', sort: true}#}
+{#                // ,{field:'score', width:80, title: '评分', sort: true}#}
+{#                // ,{field:'classify', width:80, title: '职业'}r#}
+{#                // ,{field:'wealth', width:135, title: '财富', sort: true}#}
+{#            ]]#}
+{##}
+{#        });#}
+{##}
+{#        table.on('tool(article_list)', function (obj) {#}
+{#            var data = obj.data;#}
+{#            if (obj.event === 'edit') {#}
+{#                // layer.msg('ID：' + data.id + ' 的查看操作');#}
+                {#layer.alert('编辑行：<br>'+ JSON.stringify(data));#}
+{#                //弹窗#}
+{#                //layer.open({#}
+{#                //    type: 2,#}
+{#                //    {#content: '{% url 'add_article' %}'#}
+{#                //    area: ['800px', '500px'],#}
+{#                //    content: '{% url 'edit_article' %}'#}
+{#                //});#}
+{##}
+{#                //跳转#}
+{#                window.open('{% url 'edit_article' %}' + '?article_id=' + data.id);#}
+                {#$(location).attr('href', '{% url 'add_article' %}');#}
+{##}
+{#            } else if (obj.event === 'del') {#}
+{#                layer.confirm('真的删除行么', function (index) {#}
+{#                    obj.del();#}
+{#                    layer.close(index);#}
+{#                });#}
+{#            }#}
+{##}
+{#        });#}
+{#    });#}
+{#</script>#}
+{##}
+{#<script>#}
+{#    // console.log('1111');#}
+{#    //JavaScript代码区域#}
+{#    layui.use('element', function () {#}
+{#        var element = layui.element;#}
+{#        console.log('222');#}
+{#        // element.init();#}
+{##}
+{#        //一些事件监听#}
+{#        element.on('nav(eltitle)', function (elem) {#}
+{#            console.log('111');#}
+{#            console.log(elem);#}
+{#            alert('2222')#}
+{#        });#}
+{#        element.on('nav(article_menu)', function (elem) {#}
+{#            console.log(elem.index());#}
+{#            // window.location.href = "./ceshi001.html";#}
+{##}
+{#        });#}
+{#        // element.render('nav', 'article_menu')#}
+{#    });#}
+{#</script>#}
+{#<script>#}
+{#    $('#add_article').click(function () {#}
+{#        $(location).attr('href', "{% url 'add_article' %}");#}
+{#    });#}
+{##}
+{#    $('#index').click(function () {#}
+{#        $(location).attr('href', "{% url 'index' %}");#}
+{#    });#}
+{##}
+{#    $('#image_index').click(function () {#}
+{#        $(location).attr('href', "{% url 'image_index' %}");#}
+{#    });#}
+{##}
+{#</script>#}
 <script>
-    //JavaScript代码区域
-    layui.use('element', function () {
-        var element = layui.element;
+    //富文本框
+    layui.use('layedit', function () {
+        var layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: "/set/",
+                type: "GET"
+            }
+        });
+        layedit.build('content');
 
     });
+</script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
 
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [
+                /^[\S]{6,12}$/
+                , '密码必须6到12位，且不能出现空格'
+            ]
+            , content: function (value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+        //表单赋值
+        layui.$('#LAY-component-form-setval').on('click', function () {
+            form.val('example', {
+                "username": "贤心" // "name": "value"
+                , "password": "123456"
+                , "interest": 1
+                , "like[write]": true //复选框选中状态
+                , "close": true //开关状态
+                , "sex": "女"
+                , "desc": "我爱 layui"
+            });
+        });
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function () {
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+    });
 </script>
 </body>
 </html>

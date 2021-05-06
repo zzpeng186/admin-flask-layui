@@ -1,7 +1,6 @@
 from flask import request, jsonify
 
 
-
 def check_user_token(func):
     """
     判断用户ip地址和是否登陆
