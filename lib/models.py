@@ -28,3 +28,29 @@ class ArticleModel(db.Model):
 class CategoryModel(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50))
+
+
+class LoginIpModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ip = db.Column(db.String(50))
+    ip_addr = db.Column(db.String(100))
+    add_time = db.Column(db.DateTime, default=datetime.datetime.now())
+
+
+class WhiteIpModel(db.Model):
+    """
+    白名单
+    """
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ip = db.Column(db.String(50))
+    ip_addr = db.Column(db.String(100))
+    count = db.Column(db.Integer, default=0)
+    add_time = db.Column(db.DateTime, default=datetime.datetime.now())
+
+
+class BlackIpModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ip = db.Column(db.String(50))
+    ip_addr = db.Column(db.String(100))
+    count = db.Column(db.Integer, default=0)
+    add_time = db.Column(db.DateTime, default=datetime.datetime.now())
