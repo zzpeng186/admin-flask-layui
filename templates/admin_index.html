@@ -81,7 +81,7 @@
                 <div class="layui-row layui-col-space15">
 {#                    <div class="layui-col-md6">#}
                     <div class="layui-card">
-                        <div class="layui-card-header">服务器信息</div>
+                        <div class="layui-card-header">后台信息</div>
                         <div class="layui-card-body">
                             <table class="layui-table" lay-skin="line">
 {#                                <colgroup>#}
@@ -90,7 +90,7 @@
 {#                                    <col width="200">#}
 {#                                    <col>#}
 {#                                </colgroup>#}
-                                <tbody id="server_info">
+                                <tbody>
                                 <tr>
                                     <td>访问地址</td>
                                     <td id="login_ip_addr">山东省济南市</td>
@@ -191,18 +191,20 @@
                 <div class="layui-row layui-col-space15">
                     <div class="layui-col-md6">
                         <div class="layui-card">
-                            <div class="layui-card-header">cpu信息</div>
+                            <div class="layui-card-header">服务器信息</div>
                             <div class="layui-card-body">
-                                <div id="echarts_detail" style="width: 300px;height:300px;"></div>
+                                <div id="server_info" style="width: 600px;height:400px;"></div>
+{#                                <div id="echarts_detail" style="width: 300px;height:300px;"></div>#}
                             </div>
                         </div>
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-card">
-                            <div class="layui-card-header">内存信息</div>
+                            <div class="layui-card-header">其他信息</div>
                             <div class="layui-card-body">
-                                结合 layui 的栅格系统<br>
-                                轻松实现响应式布局
+                                <div id="main" style="width: 600px;height:400px;"></div>
+{#                                结合 layui 的栅格系统<br>#}
+{#                                轻松实现响应式布局#}
                             </div>
                         </div>
                     </div>
@@ -257,27 +259,55 @@
     });
 </script>
 
-<script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('echarts_detail'));
-
-    myChart.setOption({
-        series: [
-            {
-                name: '访问来源',
-                type: 'pie',    // 设置图表类型为饼图
-                radius: '35%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
-                data: [          // 数据数组，name 为数据项名称，value 为数据项值
-                    {value: 0.5, name: '视频广告'},
-                    {value: 99.5, name: '联盟广告'},
+{#<script type="text/javascript">#}
+{#    // 基于准备好的dom，初始化echarts实例#}
+{#    var myChart = echarts.init(document.getElementById('echarts_detail'));#}
+{##}
+{#    myChart.setOption({#}
+{#        series: [#}
+{#            {#}
+{#                name: '访问来源',#}
+{#                type: 'pie',    // 设置图表类型为饼图#}
+{#                radius: '35%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。#}
+{#                data: [          // 数据数组，name 为数据项名称，value 为数据项值#}
+{#                    {value: 8.7, name: '已用空间'},#}
+{#                    {value: 91.3, name: '剩余空间'},#}
                     {#{value: 10, name: '邮件营销'},#}
                     {#{value: 15, name: '直接访问'},#}
                     {#{value: 15, name: '搜索引擎'}#}
-                ]
-            }
-        ]
-    })
-</script>
+{#                ]#}
+{#            }#}
+{#        ]#}
+{#    })#}
+{#</script>#}
+
+{#<script type="text/javascript">#}
+{#        // 基于准备好的dom，初始化echarts实例#}
+{#        var myChart = echarts.init(document.getElementById('main'));#}
+{##}
+{#        // 指定图表的配置项和数据#}
+{#        var option = {#}
+{#            title: {#}
+{#                text: '第一个 ECharts 实例'#}
+{#            },#}
+{#            tooltip: {},#}
+{#            legend: {#}
+{#                data:['使用率']#}
+{#            },#}
+{#            xAxis: {#}
+{#                data: ["cpu","内存","硬盘"]#}
+{#            },#}
+{#            yAxis: {},#}
+{#            series: [{#}
+{#                name: '使用率',#}
+{#                type: 'bar',#}
+{#                data: [8.7, 92.1, 21]#}
+{#            }]#}
+{#        };#}
+{##}
+{#        // 使用刚指定的配置项和数据显示图表。#}
+{#        myChart.setOption(option);#}
+{#    </script>#}
 {#<script>#}
 {#    layui.use('table', function () {#}
 {#        var table = layui.table;#}

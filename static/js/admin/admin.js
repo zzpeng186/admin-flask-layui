@@ -30,3 +30,48 @@ $(document).ready(function () {
             $("#black_ip").html(black_ip_html)
         })
 })
+
+function get_server_info() {
+    return $.ajax({
+        type: "GET",
+        url: "/api/admin/server_info/",
+        dataType: "json",
+        contentType: "application/json;utf-8",
+        // data: data,
+        timeout: 6000
+    });
+}
+
+$(document).ready(function () {
+    var myChart = echarts.init(document.getElementById('server_info'));
+    get_server_info()
+        .done(function (response) {
+            // 指定图表的配置项和数据
+            var cpu_info = response['data'].cpu_info;
+            var memory_info = response['data'].memory_info;
+            var disk_info = response['data'].disk_info;
+            var option = {
+                title: {
+                    text: '服务器使用率信息'
+                },
+                tooltip: {},
+                legend: {
+                    data: ['使用率']
+                },
+                xAxis: {
+                    data: ["cpu", "内存", "硬盘"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '使用率',
+                    type: 'bar',
+                    data: [cpu_info, memory_info, disk_info]
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        })
+
+
+})

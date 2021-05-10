@@ -8,6 +8,7 @@ from lib.exts import db
 
 from lib.models import UserModel, ArticleModel, CategoryModel, LoginIpModel, BlackIpModel
 from lib.users_permissions import check_user_token, get_ip_addr, check_user_token_api
+from lib.server_info import get_server_info
 
 app = Flask(__name__)
 app.config.from_object(configs)
@@ -161,6 +162,14 @@ def admin_index_list():
     server_detail_dict = {'login_ip': login_ip_str + ' ' + login_ip_addr, 'black_ip': black_ip_list}
     # data_list =
     data_dict = {'code': 0, 'msg': 'success', 'data': server_detail_dict}
+    return jsonify(data_dict)
+
+
+@app.route('/api/admin/server_info/')
+# @check_user_token_api
+def admin_server_info():
+    server_info_dict = get_server_info()
+    data_dict = {'code': 0, 'msg': 'success', 'data': server_info_dict}
     return jsonify(data_dict)
 
 
