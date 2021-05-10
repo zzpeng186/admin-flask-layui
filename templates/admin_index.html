@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/echarts/4.1.0.rc2/echarts.min.js"></script>
+    <script src="/static/js/admin/admin.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -89,43 +90,90 @@
 {#                                    <col width="200">#}
 {#                                    <col>#}
 {#                                </colgroup>#}
-                                <tbody>
+                                <tbody id="server_info">
                                 <tr>
-                                    <td>贤心</td>
-                                    <td>汉族</td>
+                                    <td>访问地址</td>
+                                    <td id="login_ip_addr">山东省济南市</td>
 
                                 </tr>
-                                <tr>
-                                    <td>张爱玲</td>
-                                    <td>汉族</td>
+{#                                <tr>#}
+{#                                    <td>cpu核心数</td>#}
+{#                                    <td>1</td>#}
 {#                                    <td>1920-09-30</td>#}
 {#                                    <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>#}
-                                </tr>
+{#                                </tr>#}
                                 <tr>
-                                    <td>Helen Keller</td>
-                                    <td>拉丁美裔</td>
+                                    <td>服务器地址</td>
+                                    <td>1.1.1.1</td>
 {#                                    <td>1880-06-27</td>#}
 {#                                    <td> Life is either a daring adventure or nothing.</td>#}
                                 </tr>
-                                <tr>
-                                    <td>岳飞</td>
-                                    <td>汉族</td>
+{#                                <tr>#}
+{#                                    <td></td>#}
+{#                                    <td>汉族</td>#}
 {#                                    <td>1103-北宋崇宁二年</td>#}
 {#                                    <td>教科书再滥改，也抹不去“民族英雄”的事实</td>#}
-                                </tr>
-                                <tr>
-                                    <td>孟子</td>
-                                    <td>华夏族（汉族）</td>
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td>孟子</td>#}
+{#                                    <td>华夏族（汉族）</td>#}
 {#                                    <td>公元前-372年</td>#}
 {#                                    <td>猿强，则国强。国强，则猿更强！</td>#}
-                                </tr>
+{#                                </tr>#}
                                 </tbody>
                             </table>
 {#                                <div>当前时间: 2021-05-06</div>#}
 {#                                <div>cpu核心数: 1</div>#}
 {#                                <div id="echarts_detail" style="width: 300px;height:300px;"></div>#}
                             </div>
-                        </div>
+
+                        <div class="layui-card-header">访问管理员页面记录(非指定ip)</div>
+                        <div class="layui-card-body">
+                            <table class="layui-table" lay-skin="line">
+                                <thead>
+                                <tr>
+                                    <th>ip</th>
+                                    <th>归属地</th>
+                                    <th>访问次数</th>
+                                </tr>
+                                </thead>
+                                <tbody id="black_ip">
+                                <tr>
+                                    <td>访问地址</td>
+                                    <td id="login_ip_addr">山东省济南市</td>
+                                    <td id="login_ip_addr">山东省济南市</td>
+                                </tr>
+{#                                <tr>#}
+{#                                    <td>cpu核心数</td>#}
+{#                                    <td>1</td>#}
+{#                                    <td>1920-09-30</td>#}
+{#                                    <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>#}
+{#                                </tr>#}
+                                <tr>
+                                    <td>服务器地址</td>
+                                    <td>1.1.1.1</td>
+{#                                    <td>1880-06-27</td>#}
+{#                                    <td> Life is either a daring adventure or nothing.</td>#}
+                                </tr>
+{#                                <tr>#}
+{#                                    <td></td>#}
+{#                                    <td>汉族</td>#}
+{#                                    <td>1103-北宋崇宁二年</td>#}
+{#                                    <td>教科书再滥改，也抹不去“民族英雄”的事实</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td>孟子</td>#}
+{#                                    <td>华夏族（汉族）</td>#}
+{#                                    <td>公元前-372年</td>#}
+{#                                    <td>猿强，则国强。国强，则猿更强！</td>#}
+{#                                </tr>#}
+                                </tbody>
+                            </table>
+{#                                <div>当前时间: 2021-05-06</div>#}
+{#                                <div>cpu核心数: 1</div>#}
+{#                                <div id="echarts_detail" style="width: 300px;height:300px;"></div>#}
+                            </div>
+                    </div>
 {#                    </div>#}
 {#                    <div class="layui-col-md6">#}
 {#                        <div class="layui-card">#}
@@ -193,6 +241,20 @@
 {#    <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">居中弹出</button>#}
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script>
+    $.ajax({
+        type: "GET",
+        url: "//",
+        dataType: "json",
+        async: true,
+        success: function (obj) {
+            // alert(data)
+            data_list = obj.data;
+            callback(data_list)
+        }
+    });
 </script>
 
 <script type="text/javascript">

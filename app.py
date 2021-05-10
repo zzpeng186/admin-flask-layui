@@ -6,8 +6,8 @@ import json
 from config import configs
 from lib.exts import db
 
-from lib.models import UserModel, ArticleModel, CategoryModel
-from lib.users_permissions import check_user_token
+from lib.models import UserModel, ArticleModel, CategoryModel, LoginIpModel, BlackIpModel
+from lib.users_permissions import check_user_token, get_ip_addr, check_user_token_api
 
 app = Flask(__name__)
 app.config.from_object(configs)
@@ -52,7 +52,7 @@ db.init_app(app)
 
 
 @app.route('/')
-# @check_user_token
+@check_user_token
 def hello_world():
     return render_template('index.html')
     # return 'Hello World!'
@@ -134,9 +134,34 @@ def title_list():
 @app.route('/admin/index/')
 @check_user_token
 def admin_index():
+    ip_str = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
+    ip_addr = get_ip_addr(ip_str)
+    login_ip = LoginIpModel(ip=ip_str, ip_addr=ip_addr)
+    db.session.add(login_ip)
+    db.session.commit()
     return render_template('admin_index.html')
 
 
+@app.route('/api/admin/index/')
+# @check_user_token_api
+def admin_index_list():
+    # 登陆信息
+    login_ip_obj = LoginIpModel.query.order_by(LoginIpModel.id.desc()).first()
+    login_ip_str = login_ip_obj.ip
+    login_ip_addr = login_ip_obj.ip_addr
+    # 黑名单排行
+    black_ip_obj = BlackIpModel.query.order_by(BlackIpModel.count.desc()).limit(5)
+    black_ip_list = []
+    for black_ip_detail in black_ip_obj:
+        # black_list = []
+        black_list = [black_ip_detail.ip, black_ip_detail.ip_addr, black_ip_detail.count]
+        # black_ip_dict[black_ip_detail.ip] = black_ip_detail.ip_addr
+        black_ip_list.append(black_list)
+    print(black_ip_list)
+    server_detail_dict = {'login_ip': login_ip_str + ' ' + login_ip_addr, 'black_ip': black_ip_list}
+    # data_list =
+    data_dict = {'code': 0, 'msg': 'success', 'data': server_detail_dict}
+    return jsonify(data_dict)
 
 
 if __name__ == '__main__':
