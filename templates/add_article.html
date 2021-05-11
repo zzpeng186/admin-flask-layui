@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 后台大布局 - Layui</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">layui 后台布局</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left" lay-filter="eltitle">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    贤心
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="article_menu">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">所有商品</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" id="index">首页</a></dd>
+                        <dd><a href="javascript:;" class="layui-this" id="add_article">新增</a></dd>
+                        <dd><a href="javascript:;" id="image_index">展示</a></dd>
+                        <dd><a href="">超链接</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">解决方案</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">列表一</a></dd>
+                        <dd><a href="javascript:;">列表二</a></dd>
+                        <dd><a href="">超链接</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">云市场</a></li>
+                <li class="layui-nav-item"><a href="">发布商品</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <blockquote class="layui-elem-quote">
+                新增
+            </blockquote>
+            <form class="layui-form" action="" lay-filter="example">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">标题</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题"
+                               class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">分类</label>
+                    <div class="layui-input-block">
+                        <select name="interest" lay-filter="aihao" id="category_list">
+                            {% for category in category_list %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+{#                            <option value=""></option>#}
+{#                            <option value="0">写作</option>#}
+{#                            <option value="1">阅读</option>#}
+{#                            <option value="2">游戏</option>#}
+{#                            <option value="3">音乐</option>#}
+{#                            <option value="4">旅行</option>#}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">内容</label>
+                    <div class="layui-input-block">
+                        <!--<input type="text" name="content" placeholder="请输入内容" autocomplete="off" class="layui-input">-->
+                        <textarea lay-verify="content" class="layui-textarea" name="content" id="LAY_demo_editor" style="display: none">12345</textarea>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发表日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label">复选框</label>-->
+                <!--<div class="layui-input-block">-->
+                <!--<input type="checkbox" name="like[write]" title="写作">-->
+                <!--<input type="checkbox" name="like[read]" title="阅读">-->
+                <!--<input type="checkbox" name="like[daze]" title="发呆">-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="layui-form-item">-->
+                <!--<label class="layui-form-label">开关</label>-->
+                <!--<div class="layui-input-block">-->
+                <!--<input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">-->
+                <!--</div>-->
+                <!--</div>-->
+
+{#                <div class="layui-form-item">#}
+{#                    <label class="layui-form-label">是否展示在主页</label>#}
+{#                    <div class="layui-input-block">#}
+{#                        <input type="radio" name="show_index" value="1" title="是" checked="">#}
+{#                        <input type="radio" name="show_index" value="0" title="否">#}
+{#                    </div>#}
+{#                </div>#}
+
+                <!--<div class="layui-form-item layui-form-text">-->
+                <!--<label class="layui-form-label">文本域</label>-->
+                <!--<div class="layui-input-block">-->
+                <!--<textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <!--<button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">赋值</button>-->
+                        <!--<button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-getval">取值</button>-->
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    </div>
+                </div>
+{#                {% csrf_token %}#}
+            </form>
+
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+
+
+<script src="/static/layui/layui.js"></script>
+{#<script>#}
+{#    $(document).ready(function () {#}
+{#        $.ajax({#}
+{#            type: "get",#}
+{#            dataType: "json",#}
+{#            data: "",#}
+{#            async: false,#}
+{#            url: '',#}
+{#            success: function (obj) {#}
+{#                var html = '<option value=""></option>';#}
+                {#alert(obj.data[0].id);#}
+{##}
+{#                for (var i=0; i<obj.data.length; i++) {#}
+{#                    html += '<option value="' + obj.data[i].id + '">' +#}
+{#                            obj.data[i].name + '</option>';#}
+{##}
+                    {#html += '</option>'#}
+{#                }#}
+                {#alert(obj.data[0].name);#}
+                {#alert(html);#}
+{#                $("#category_list").html(html)#}
+{#            }#}
+{#        });#}
+{#    });#}
+{#</script>#}
+<script>
+    // console.log('1111');
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+        console.log('222');
+        // element.init();
+
+        //一些事件监听
+        element.on('nav(eltitle)', function (elem) {
+            console.log('111');
+            console.log(elem);
+            alert('2222')
+        });
+        element.on('nav(article_menu)', function (elem) {
+            console.log(elem.index());
+            alert(elem.elem)
+            // window.location.href = "./ceshi001.html";
+
+        });
+        element.on('tab(aihao)', function () {
+            alert('hahahah')
+        });
+        element.render('nav', 'article_menu')
+    });
+</script>
+{#<script>#}
+{#    $('#add_article').click(function () {#}
+{#        $(location).attr('href', "{% url 'add_article' %}");#}
+{#    });#}
+{##}
+{#    $('#index').click(function () {#}
+{#        $(location).attr('href', "{% url 'index' %}");#}
+{#    });#}
+{##}
+{#    $('#image_index').click(function () {#}
+{#        $(location).attr('href', "{% url 'image_index' %}");#}
+{#    });#}
+{##}
+{#</script>#}
+{#<script>#}
+{#    //富文本框#}
+{#    layui.use('layedit', function () {#}
+{#        var layedit = layui.layedit;#}
+{#        var data_index;#}
+{#        layedit.set({#}
+{#            uploadImage: {#}
+{#                url: "./",#}
+{#                type: "GET"#}
+{#            }#}
+{#        });#}
+{#        data_index = layedit.build('content');#}
+{#        alert(layedit.getContent(data_index));#}
+{#        layedit.sync(data_index)#}
+{##}
+{#    });#}
+{#</script>#}
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+            , value: new Date()
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        layedit.set({
+            uploadImage: {
+                url: '/api/admin/add_image/',
+            }
+        });
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            {#, pass: [#}
+            {#    /^[\S]{6,12}$/#}
+            {#    , '密码必须6到12位，且不能出现空格'#}
+            {#]#}
+            , content: function (value) {
+                return layedit.sync(editIndex);
+                {#alert(layedit.getContent(editIndex))#}
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            {#alert(data.field.content=layedit.getContent(editIndex));#}
+            console.log(data.field);
+            {#layer.alert(JSON.stringify(data.field), {#}
+            {#    title: '最终的提交信息'#}
+            //});
+            data = JSON.stringify(data.field);
+            alert(data)
+            send_detail(data);
+            return false;
+        });
+
+        // //表单赋值
+        // layui.$('#LAY-component-form-setval').on('click', function () {
+        //     form.val('example', {
+        //         "username": "贤心" // "name": "value"
+        //         , "password": "123456"
+        //         , "interest": 1
+        //         , "like[write]": true //复选框选中状态
+        //         , "close": true //开关状态
+        //         , "sex": "女"
+        //         , "desc": "我爱 layui"
+        //     });
+        // });
+        //
+        // //表单取值
+        // layui.$('#LAY-component-form-getval').on('click', function () {
+        //     var data = form.val('example');
+        //     alert(JSON.stringify(data));
+        // });
+
+    });
+
+    function send_detail(data) {
+        $.ajax({
+            type:"post",
+            dataType:"json",
+            data: data,
+            async:true,
+            url: '/api/admin/article_add/',
+            beforeSend: function (xhr, settings){
+                      xhr.setRequestHeader("X-CSRFToken", settings);
+                  },
+            success: function (obj) {
+                alert('success')
+            }
+        })
+    }
+</script>
+</body>
+</html>

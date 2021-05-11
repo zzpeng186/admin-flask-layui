@@ -75,3 +75,28 @@ $(document).ready(function () {
 
 
 })
+
+function get_title_list_api() {
+    return $.ajax({
+        type: "GET",
+        url: "/api/admin/title_list/",
+        dataType: "json",
+        contentType: "application/json;utf-8",
+        // data: data,
+        timeout: 6000
+    });
+}
+
+$(document).ready(function () {
+    get_title_list_api()
+        .done(function (response) {
+            var html = "";
+            for (var i = 0; i < response['data'].length; i++) {
+                html += '<tr>' + '<td>' + response['data'][i].title + '</td>' +
+                    '<td>' + response['data'][i].read_num + '</td>' +
+                    '<td><button type="button" class="layui-btn layui-btn-sm layui-btn-normal" onclick="">' +
+                    '编辑' + '</button>' + '</td>' + '</tr>'
+            }
+            $("#title_list").html(html)
+        })
+})

@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template, jsonify, request
 
 import json
+import os
 
 from config import configs
 from lib.exts import db
@@ -143,6 +144,83 @@ def admin_index():
     return render_template('admin_index.html')
 
 
+@app.route('/admin/add_article')
+@check_user_token
+def add_article():
+    category_obj = CategoryModel.query.all()
+    context = {'category_list': category_obj}
+    return render_template('add_article.html', category_list=category_obj)
+
+
+@app.route('/api/admin/article_add/', methods=['POST'])
+@check_user_token_api
+def article_add():
+    request_data = request.get_data()
+    json_data = json.loads(request_data)
+    print(json_data)
+    title = json_data['title']
+    print(title)
+    category_id = int(json_data['interest'])
+    content = json_data['content']
+    article_obj = ArticleModel(title=title, category_id=category_id, content=content, author_id=1)
+    db.session.add(article_obj)
+    db.session.commit()
+    return jsonify({'code': 0, 'msg': 'success'})
+
+@app.route('/api/admin/add_image/', methods=['POST'])
+@check_user_token_api
+def add_image():
+    # pass
+    '''图片上传处理页'''
+    # 【1】得到图片
+    # pic = request.FILES['file']
+    pic = request.files.get('file')
+    print(pic.filename)
+    # 【2】拼接图片保存路径+图片名
+    ext = pic.filename.split('.')[-1]
+    import time
+    pic_name = str(int(time.time())) + '.' + ext
+    time_path = time.strftime("%Y/%m/%d", time.localtime(time.time()))
+    print(time_path)
+    # image_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    image_path = os.path.abspath(os.path.dirname(__file__))
+
+    pic_path = '{}/upload/{}/'.format(image_path, time_path)
+    if not os.path.exists(pic_path):
+        os.makedirs(pic_path)
+
+    file_path = pic_path + pic_name
+    pic.save(file_path)
+    image_upload_path = '/upload/{}/{}/'.format(time_path, pic_name)
+    return jsonify({'msg': 'success', 'code': 0, 'data': {'src': str(pic_path)}})
+
+    save_path = pic_path + '{}'.format(pic_name)
+    # save_path = '{}/{}/{}'.format(MEDIA_ROOT, time_path, pic_name)
+    # save_path = '{}/app1/{}'.format(MEDIA_ROOT, pic_name)
+    # save_path = "%s/app1/%s" % (MEDIA_ROOT, pic.name)
+    # 【3】保存图片到指定路径，因为图片是2进制式，因此用wb，
+    with open(save_path, 'wb') as f:
+        # pic.chunks()为图片的一系列数据，它是一一段段的，所以要用for逐个读取
+        for content in pic.chunks():
+            f.write(content)
+
+    # 【4】保存图片路径到数据库，此处只保存其相对上传目录的路径
+    # article_obj = ArticleModel.objects.get(id=1)
+    # article_obj.image_path = 'media/' + 'app1/{}'.format(pic.name)
+    # article_obj.save()
+    image_path = pic_path + '{}'.format(pic_name)
+    # image_path = '{}'.format(MEDIA_ROOT) + '/{}/{}'.format(time_path, pic_name)
+    # image_path = 'media/' + 'app1/{}'.format(pic.name)
+    src = image_path
+    print(src)
+    # ArticleModel.objects.create(image_path='app1/%s' % pic.name)
+
+    # 【5】别忘记返回信息
+    # return HttpResponse('上传成功，图片地址：app1/%s' % pic.name)
+    return HttpResponse(json.dumps({'msg': 'success', 'code': 0, 'data': {'src': str(image_path)}}))
+
+
 @app.route('/api/admin/index/')
 # @check_user_token_api
 def admin_index_list():
@@ -170,6 +248,22 @@ def admin_index_list():
 def admin_server_info():
     server_info_dict = get_server_info()
     data_dict = {'code': 0, 'msg': 'success', 'data': server_info_dict}
+    return jsonify(data_dict)
+
+
+@app.route('/api/admin/title_list/')
+# @check_user_token_api
+def title_list_api():
+    article_obj = ArticleModel.query.order_by(ArticleModel.read_num.desc()).limit(5)
+    article_list = []
+    for article_obj_detail in article_obj:
+        article_dict = {}
+        article_dict['id'] = article_obj_detail.id
+        article_dict['title'] = article_obj_detail.title
+        article_dict['read_num'] = article_obj_detail.read_num
+        article_list.append(article_dict)
+    print(article_list)
+    data_dict = {'code': 0, 'msg': 'success', 'data': article_list}
     return jsonify(data_dict)
 
 
