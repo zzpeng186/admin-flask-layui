@@ -162,10 +162,12 @@ def article_add():
     print(title)
     category_id = int(json_data['interest'])
     content = json_data['content']
-    article_obj = ArticleModel(title=title, category_id=category_id, content=content, author_id=1)
+    add_time = json_data['date']
+    article_obj = ArticleModel(title=title, category_id=category_id, content=content, author_id=1, add_time=add_time)
     db.session.add(article_obj)
     db.session.commit()
     return jsonify({'code': 0, 'msg': 'success'})
+
 
 @app.route('/api/admin/add_image/', methods=['POST'])
 @check_user_token_api

@@ -6,6 +6,10 @@
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+{#    <script src="https://cdn.bootcss.com/echarts/4.1.0.rc2/echarts.min.js"></script>#}
+    <script src="/static/layui/layui.js"></script>
+    <script src="/static/js/admin/add_article.js"></script>
+
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -167,7 +171,7 @@
 </div>
 
 
-<script src="/static/layui/layui.js"></script>
+{#<script src="/static/layui/layui.js"></script>#}
 {#<script>#}
 {#    $(document).ready(function () {#}
 {#        $.ajax({#}
@@ -193,32 +197,32 @@
 {#        });#}
 {#    });#}
 {#</script>#}
-<script>
-    // console.log('1111');
-    //JavaScript代码区域
-    layui.use('element', function () {
-        var element = layui.element;
-        console.log('222');
-        // element.init();
-
-        //一些事件监听
-        element.on('nav(eltitle)', function (elem) {
-            console.log('111');
-            console.log(elem);
-            alert('2222')
-        });
-        element.on('nav(article_menu)', function (elem) {
-            console.log(elem.index());
-            alert(elem.elem)
-            // window.location.href = "./ceshi001.html";
-
-        });
-        element.on('tab(aihao)', function () {
-            alert('hahahah')
-        });
-        element.render('nav', 'article_menu')
-    });
-</script>
+{#<script>#}
+{#    // console.log('1111');#}
+{#    //JavaScript代码区域#}
+{#    layui.use('element', function () {#}
+{#        var element = layui.element;#}
+{#        console.log('222');#}
+{#        // element.init();#}
+{##}
+{#        //一些事件监听#}
+{#        element.on('nav(eltitle)', function (elem) {#}
+{#            console.log('111');#}
+{#            console.log(elem);#}
+{#            alert('2222')#}
+{#        });#}
+{#        element.on('nav(article_menu)', function (elem) {#}
+{#            console.log(elem.index());#}
+{#            alert(elem.elem)#}
+{#            // window.location.href = "./ceshi001.html";#}
+{##}
+{#        });#}
+{#        element.on('tab(aihao)', function () {#}
+{#            alert('hahahah')#}
+{#        });#}
+{#        element.render('nav', 'article_menu')#}
+{#    });#}
+{#</script>#}
 {#<script>#}
 {#    $('#add_article').click(function () {#}
 {#        $(location).attr('href', "{% url 'add_article' %}");#}
@@ -250,104 +254,110 @@
 {##}
 {#    });#}
 {#</script>#}
-<script>
-    layui.use(['form', 'layedit', 'laydate'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
-
-        //日期
-        laydate.render({
-            elem: '#date'
-            , value: new Date()
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-
-        layedit.set({
-            uploadImage: {
-                url: '/api/admin/add_image/',
-            }
-        });
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-        //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
-            }
+{#<script>#}
+{#    layui.use(['form', 'layedit', 'laydate'], function () {#}
+{#        var form = layui.form#}
+{#            , layer = layui.layer#}
+{#            , layedit = layui.layedit#}
+{#            , laydate = layui.laydate;#}
+{##}
+{#        //日期#}
+{#        laydate.render({#}
+{#            elem: '#date'#}
+{#            , value: new Date()#}
+{#        });#}
+{#        laydate.render({#}
+{#            elem: '#date1'#}
+{#        });#}
+{##}
+{#        layedit.set({#}
+{#            uploadImage: {#}
+{#                url: '/api/admin/add_image/',#}
+{#            }#}
+{#        });#}
+{#        //创建一个编辑器#}
+{#        var editIndex = layedit.build('LAY_demo_editor');#}
+{##}
+{#        //自定义验证规则#}
+{#        form.verify({#}
+{#            title: function (value) {#}
+{#                if (value.length < 5) {#}
+{#                    return '标题至少得5个字符啊';#}
+{#                }#}
+{#            }#}
             {#, pass: [#}
             {#    /^[\S]{6,12}$/#}
             {#    , '密码必须6到12位，且不能出现空格'#}
             {#]#}
-            , content: function (value) {
-                return layedit.sync(editIndex);
+{#            , content: function (value) {#}
+{#                return layedit.sync(editIndex);#}
                 {#alert(layedit.getContent(editIndex))#}
-            }
-        });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
-
-        //监听提交
-        form.on('submit(demo1)', function (data) {
+{#            }#}
+{#        });#}
+{##}
+{#        //监听指定开关#}
+{#        form.on('switch(switchTest)', function (data) {#}
+{#            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {#}
+{#                offset: '6px'#}
+{#            });#}
+{#            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)#}
+{#        });#}
+{##}
+{#        //监听提交#}
+{#        form.on('submit(demo1)', function (data) {#}
             {#alert(data.field.content=layedit.getContent(editIndex));#}
-            console.log(data.field);
+{#            console.log(data.field);#}
             {#layer.alert(JSON.stringify(data.field), {#}
             {#    title: '最终的提交信息'#}
-            //});
-            data = JSON.stringify(data.field);
-            alert(data)
-            send_detail(data);
-            return false;
-        });
-
-        // //表单赋值
-        // layui.$('#LAY-component-form-setval').on('click', function () {
-        //     form.val('example', {
-        //         "username": "贤心" // "name": "value"
-        //         , "password": "123456"
-        //         , "interest": 1
-        //         , "like[write]": true //复选框选中状态
-        //         , "close": true //开关状态
-        //         , "sex": "女"
-        //         , "desc": "我爱 layui"
-        //     });
-        // });
-        //
-        // //表单取值
-        // layui.$('#LAY-component-form-getval').on('click', function () {
-        //     var data = form.val('example');
-        //     alert(JSON.stringify(data));
-        // });
-
-    });
-
-    function send_detail(data) {
-        $.ajax({
-            type:"post",
-            dataType:"json",
-            data: data,
-            async:true,
-            url: '/api/admin/article_add/',
-            beforeSend: function (xhr, settings){
-                      xhr.setRequestHeader("X-CSRFToken", settings);
-                  },
-            success: function (obj) {
-                alert('success')
-            }
-        })
-    }
-</script>
+{#            //});#}
+{#            data = JSON.stringify(data.field);#}
+{#            alert(data)#}
+{#            var is_success = send_detail(data);#}
+{#            if (is_success == "success") {#}
+{#                location.reload();#}
+{#                alert('2222')#}
+{#            }#}
+{#            return false;#}
+{#        });#}
+{##}
+{#        // //表单赋值#}
+{#        // layui.$('#LAY-component-form-setval').on('click', function () {#}
+{#        //     form.val('example', {#}
+{#        //         "username": "贤心" // "name": "value"#}
+{#        //         , "password": "123456"#}
+{#        //         , "interest": 1#}
+{#        //         , "like[write]": true //复选框选中状态#}
+{#        //         , "close": true //开关状态#}
+{#        //         , "sex": "女"#}
+{#        //         , "desc": "我爱 layui"#}
+{#        //     });#}
+{#        // });#}
+{#        //#}
+{#        // //表单取值#}
+{#        // layui.$('#LAY-component-form-getval').on('click', function () {#}
+{#        //     var data = form.val('example');#}
+{#        //     alert(JSON.stringify(data));#}
+{#        // });#}
+{##}
+{#    });#}
+{##}
+{#    function send_detail(data) {#}
+{#        $.ajax({#}
+{#            type:"post",#}
+{#            dataType:"json",#}
+{#            data: data,#}
+{#            async:false,#}
+{#            url: '/api/admin/article_add/',#}
+{#            beforeSend: function (xhr, settings){#}
+{#                      xhr.setRequestHeader("X-CSRFToken", settings);#}
+{#                  },#}
+{#            success: function (obj) {#}
+                {#alert('success')#}
+{#                alert(obj.msg)#}
+{#                return obj.msg#}
+{#            }#}
+{#        })#}
+{#    }#}
+{#</script>#}
 </body>
 </html>
