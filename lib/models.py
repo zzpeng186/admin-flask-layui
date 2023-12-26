@@ -18,8 +18,7 @@ class ArticleModel(db.Model):
     content = db.Column(db.Text)
     author_id = db.Column(db.Integer, db.ForeignKey('user_model.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('category_model.id'))
-    read_num = db.Column(db.Integer, default=0)
-    add_time = db.Column(db.DateTime, default=datetime.date.today())
+    add_time = db.Column(db.DateTime, default=datetime.date)
     # time_tree = db.Column(db.Date, default=datetime.date.month)
 
     author = db.relationship("UserModel", backref="articles")
